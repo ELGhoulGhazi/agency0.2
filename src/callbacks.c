@@ -1361,14 +1361,25 @@ on_buttonACSupprimer_clicked           (GtkWidget       *objet_graphique,
                                         gpointer         user_data)
 {
 char cin[2000];
-GtkWidget *recherche ;
+GtkWidget *recherche ,*treeview ,*emp ,*clients;
 
 recherche=lookup_widget(objet_graphique,"entryRechercherAC");
 
+emp=lookup_widget(objet_graphique,"GestionAClient");
 
 strcpy(cin,gtk_entry_get_text(GTK_ENTRY(recherche)));
 
 supprimerclient(cin);
+
+clients=create_GestionAClient() ;
+gtk_widget_show(clients);
+gtk_widget_hide(emp);
+
+
+treeview=lookup_widget(clients,"treeviewAclient");
+afficherclient(treeview) ; 
+
+
 }
 
 char name1[200];
@@ -1394,13 +1405,20 @@ on_buttonsuppemp_clicked               (GtkWidget       *objet_graphique,
                                         gpointer         user_data)
 {
 char name[2000];
-GtkWidget *recherche ;
+GtkWidget *recherche ,*treeview ,*emp ,*gemp ;
 
 recherche=lookup_widget(objet_graphique,"entryrechercheemp");
-
+emp=lookup_widget(objet_graphique,"GestionAEmployes");
 
 strcpy(name,gtk_entry_get_text(GTK_ENTRY(recherche)));
 supprimeremployer(name);
+
+gemp=create_GestionAEmployes() ;
+gtk_widget_show(gemp);
+gtk_widget_hide(emp);
+
+treeview=lookup_widget(gemp,"treeviewemp");
+afficheremp(treeview) ; 
 
 
 }
@@ -2253,4 +2271,6 @@ gtk_widget_hide(modif);
 
 effacer() ; 
 }
+
+
 
