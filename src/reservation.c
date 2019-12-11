@@ -8,21 +8,9 @@
 #  include <config.h>
 #endif
 
-enum
-{
-DEPART, 
-DESTINATION, 
-COMPAGNIE, 
-HEUREDEDEPART, 
-DATEALLER,
-DATERETOUR,
-PRIX,
-PAYS,
-HOTEL, 
-MARQUE,
-COLUMNS
 
-}; 
+
+
 
 
 int verifierdest (char depart[] ,char destination[], char heurededepart[50][50] ,char compagnie[50][50],char datealler[50][50], char dateretour[50][50],char prix[] ) 
@@ -105,7 +93,19 @@ fclose(f);
 }
 }
 
-/*
+enum 
+{
+DEPART, 
+DESTINATION, 
+COMPAGNIE, 
+HEUREDEDEPART, 
+DATEALLER,
+DATERETOUR,
+PRIX,
+COLUMNS
+}; 
+
+
 void affichervol (GtkTreeView *liste)
 {
 GtkCellRenderer *render ;
@@ -177,13 +177,13 @@ f=fopen("/home/ggmghoul/Desktop/agency-master/src/voldispo.txt","a+") ;
 gtk_list_store_append (store,&iter) ; 
 gtk_list_store_set (store,&iter,DEPART,depart,DESTINATION,destination,HEUREDEDEPART,heure,COMPAGNIE,compagnie,DATEALLER,da,DATERETOUR,dr,PRIX,prix,-1) ; 
 }
-fclose(f) ; 
+fclose(f) ; }
 gtk_tree_view_set_model(GTK_TREE_VIEW (liste),GTK_TREE_MODEL (store)); 
 g_object_unref (store) ; 
+
 }
 }
-}
-*/
+
 void ajouterhybergement (hyber h)
 {
 FILE *f;
@@ -194,7 +194,17 @@ if(f!=NULL)
 fclose(f);
 }
 }
-/*
+
+enum 
+{
+PAYS, 
+HOTEL,
+PRIX0,
+COLUMNS0
+
+}; 
+
+
 void afficherhybergement (GtkTreeView *liste)
 {
 GtkCellRenderer *render ;
@@ -223,11 +233,11 @@ gtk_tree_view_append_column (GTK_TREE_VIEW(liste),column);
 
 
 render=gtk_cell_renderer_text_new () ; 
-column =gtk_tree_view_column_new_with_attributes("Prix",render,"text",PRIX,NULL) ; 
+column =gtk_tree_view_column_new_with_attributes("Prix",render,"text",PRIX0,NULL) ; 
 gtk_tree_view_append_column (GTK_TREE_VIEW(liste),column); 
 
 
-store=gtk_list_store_new(COLUMNS,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING) ; 
+store=gtk_list_store_new(COLUMNS0,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING) ; 
 
 f=fopen("/home/ggmghoul/Desktop/agency-master/src/hyberdispo.txt","r") ; 
 if (f==NULL) 
@@ -240,15 +250,15 @@ f=fopen("/home/ggmghoul/Desktop/agency-master/src/hyberdispo.txt","a+") ;
  while(fscanf(f," %s %s %s \n" ,h.pays,h.hotel,h.prix)!=EOF) 
 {
 gtk_list_store_append (store,&iter) ; 
-gtk_list_store_set (store,&iter,PAYS,h.pays,HOTEL,h.hotel,PRIX,h.prix,-1) ; 
+gtk_list_store_set (store,&iter,PAYS,h.pays,HOTEL,h.hotel,PRIX0,h.prix,-1) ; 
 }
-fclose(f) ; 
+fclose(f) ; }
 gtk_tree_view_set_model(GTK_TREE_VIEW (liste),GTK_TREE_MODEL (store)); 
 g_object_unref (store) ; 
+
 }
 }
-}
-*/
+
 
 void ajouterlocation (loc l)
 {
@@ -260,7 +270,18 @@ if(f!=NULL)
 fclose(f);
 }
 }
-/*
+
+
+
+
+enum 
+{
+MARQUE,
+PRIX2,
+COLUMNS2,
+
+}; 
+
 void afficherlocation (GtkTreeView *liste)
 {
 GtkCellRenderer *render ;
@@ -284,14 +305,14 @@ gtk_tree_view_append_column (GTK_TREE_VIEW(liste),column);
 
 
 render=gtk_cell_renderer_text_new () ; 
-column =gtk_tree_view_column_new_with_attributes("Prix",render,"text",PRIX,NULL) ; 
+column =gtk_tree_view_column_new_with_attributes("Prix",render,"text",PRIX2,NULL) ; 
 gtk_tree_view_append_column (GTK_TREE_VIEW(liste),column); 
 
 
 
 
 
-store=gtk_list_store_new(COLUMNS,G_TYPE_STRING,G_TYPE_STRING) ; 
+store=gtk_list_store_new(COLUMNS2,G_TYPE_STRING,G_TYPE_STRING) ; 
 
 f=fopen("/home/ggmghoul/Desktop/agency-master/src/locdispo.txt","r") ; 
 if (f==NULL) 
@@ -305,14 +326,14 @@ f=fopen("/home/ggmghoul/Desktop/agency-master/src/locdispo.txt","a+") ;
  while(fscanf(f," %s %s \n" ,l.marque,l.prix)!=EOF) 
 {
 gtk_list_store_append (store,&iter) ; 
-gtk_list_store_set (store,&iter,MARQUE,l.marque,PRIX,l.prix,-1) ; 
+gtk_list_store_set (store,&iter,MARQUE,l.marque,PRIX2,l.prix,-1) ; 
 }
-fclose(f) ; 
+fclose(f) ; }
 gtk_tree_view_set_model(GTK_TREE_VIEW (liste),GTK_TREE_MODEL (store)); 
 g_object_unref (store) ; 
+
 }
 }
-}*/
 
 
 int departdestdispo (char depart[][30] ,char destination[][30]) 
@@ -704,5 +725,159 @@ if(f1!=NULL)
 }
 
 
+/*---------------------------------------------afficherreservationtotale----------------------------------------------*/
+enum 
+{
+CIN,
+VOSRESERVATION,
+PRIX1,
+COLUMNS1
+}; 
+
+void afficherreservation (GtkTreeView *liste)
+{
+GtkCellRenderer *render ;
+GtkTreeViewColumn *column ; 
+GtkTreeIter iter ; 
+
+GtkListStore *store ;
+
+char cin[50]; 
+char reserv[50]; 
+char prix[50]; 
+
+store=NULL ; 
+FILE* f ; 
+
+store=gtk_tree_view_get_model(liste) ; 
+if (store==NULL) 
+{
+
+render=gtk_cell_renderer_text_new () ; 
+column =gtk_tree_view_column_new_with_attributes("Cin",render,"text",CIN,NULL) ; 
+gtk_tree_view_append_column (GTK_TREE_VIEW(liste),column); 
+
+render=gtk_cell_renderer_text_new () ; 
+column =gtk_tree_view_column_new_with_attributes("Reservation",render,"text",VOSRESERVATION,NULL) ; 
+gtk_tree_view_append_column (GTK_TREE_VIEW(liste),column); 
 
 
+render=gtk_cell_renderer_text_new () ; 
+column =gtk_tree_view_column_new_with_attributes("Prix",render,"text",PRIX1,NULL) ; 
+gtk_tree_view_append_column (GTK_TREE_VIEW(liste),column); 
+
+
+
+
+store=gtk_list_store_new(COLUMNS1,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING) ; 
+
+f=fopen("/home/ggmghoul/Desktop/agency-master/src/reservationtotale.txt","r") ; 
+if (f==NULL) 
+{
+return ; 
+}
+else 
+{
+f=fopen("/home/ggmghoul/Desktop/agency-master/src/reservationtotale.txt","a+") ;
+ while(fscanf(f,"%s %s \n" ,reserv,prix)!=EOF) 
+{
+gtk_list_store_append (store,&iter) ; 
+gtk_list_store_set (store,&iter,CIN,cin,VOSRESERVATION,reserv,PRIX1,prix,-1) ; 
+}
+fclose(f) ; }
+gtk_tree_view_set_model(GTK_TREE_VIEW (liste),GTK_TREE_MODEL (store)); 
+g_object_unref (store) ; 
+}
+}
+
+
+/*-------------------reservtotale---------------------------------------------*/
+
+
+void reservtotal(char cin[]) 
+{
+FILE *f ;
+FILE *f1 ;
+FILE *f2 ;
+FILE *f3 ;
+
+
+volclient cv ; 
+hyberclient hc ; 
+locationclient lc ; 
+
+f=fopen("/home/ggmghoul/Desktop/agency-master/src/reservationvol.txt","r");
+f1=fopen("/home/ggmghoul/Desktop/agency-master/src/reservationhyber.txt","r");
+f2=fopen("/home/ggmghoul/Desktop/agency-master/src/reservationlocation.txt","r");
+f3=fopen("/home/ggmghoul/Desktop/agency-master/src/reservationtotale.txt","a+");
+    if (f!=NULL) 
+       {
+          if (f1!=NULL) 
+             {  
+                  if(f2!=NULL) 
+                        { 
+                            if (f3!=NULL) 
+                                  {
+           while(fscanf(f,"%s %s %s %s %s %s %s %s %s %d %d %d %d \n",cv.cin,cv.depart,cv.destination,cv.heure,cv.compagnie,cv.ar,cv.datealler,cv.dateretour,cv.classe,&cv.adulte,&cv.enf,&cv.bb,&cv.prix)!=EOF )
+                { 
+                 if (strcmp(cin,cv.cin)==0) 
+             fprintf(f3,"%s %s %d \n",cv.cin,cv.destination,cv.prix) ;  
+                }
+while(fscanf(f1,"%s %s %s %d %d %s %d \n",hc.cin,hc.pays,hc.hotel,&hc.jd,&hc.nbp,hc.fnf,&hc.prix)!=EOF )
+                { 
+                 if (strcmp(cin,hc.cin)==0) 
+             fprintf(f3,"%s %s %d \n",hc.cin,hc.hotel,hc.prix) ;  
+                }
+while(fscanf(f2,"%s %s %d %d \n",lc.cin,lc.marque,&lc.nbj,&lc.prix)!=EOF )
+                { 
+                 if (strcmp(cin,hc.cin)==0) 
+             fprintf(f3,"%s %s %d \n",lc.cin,lc.marque,lc.prix) ;  
+                }
+
+                                 }fclose(f3) ; 
+                        }fclose(f2) ; 
+            }fclose(f1) ; 
+        }fclose(f) ; 
+
+}
+
+
+/*------------------------------------------------reservdata---------------------------------------------*/
+
+
+void stockage() 
+{
+
+FILE *f ;
+FILE *f1 ; 
+
+char reserv[50]; 
+char prix[50]; 
+char cin[50]; 
+
+f=fopen("/home/ggmghoul/Desktop/agency-master/src/reservationtotale.txt","r");
+f1=fopen("/home/ggmghoul/Desktop/agency-master/src/reservationdata.txt","a+");
+
+   if (f!=NULL) 
+      { 
+         if (f1!=NULL) 
+              { 
+             while(fscanf(f,"%s %s %s \n",cin,reserv,prix)!=EOF )
+           {
+          fprintf(f1,"%s %s %s \n",cin,reserv,prix) ; 
+           }
+              }fclose(f1); 
+      }fclose(f) ;
+
+
+}
+
+
+/*------------------------------------effacement-----------------------------------------*/
+
+void effacer() 
+{
+remove ("/home/ggmghoul/Desktop/agency-master/src/reservationtotale.txt");
+	rename ("/home/ggmghoul/Desktop/agency-master/src/reservationtotale1.txt","/home/ggmghoul/Desktop/agency-master/src/reservationtotale.txt");
+
+}

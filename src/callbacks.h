@@ -453,3 +453,24 @@ on_checkbuttonnfumeur_toggled          (GtkWidget        *objet_graphique,
 void
 on_buttonvaliderlocation_clicked       (GtkWidget        *objet_graphique,
                                         gpointer         user_data);
+
+void
+on_buttonPanier_clicked                (GtkWidget        *objet_graphique,
+                                        gpointer         user_data);
+
+void
+on_buttonretourvaliderreservationtomodeclient_clicked
+                                        (GtkWidget        *objet_graphique,
+                                        gpointer         user_data);
+
+void
+on_buttonvaliderreservation_clicked    (GtkWidget        *objet_graphique,
+                                        gpointer         user_data);
+
+void
+on_buttonafficherreservation_clicked   (GtkWidget        *objet_graphique,
+                                        gpointer         user_data);
+
+void
+on_buttonok_clicked                    (GtkWidget        *objet_graphique,
+                                        gpointer         user_data);

@@ -102,4 +102,11 @@ void reservervol(volclient cv) ;
 void reserverhyber(hyberclient hc) ;
 void reserverlocation(locationclient lc) ; 
 
+
+void reservtotal(char cin[]) ; 
+void afficherreservation (GtkTreeView *liste);
+
+void stockage() ;
+void effacer() ;
+
 //int departdestdispo (char depart[][30] ,char destination[][30]);

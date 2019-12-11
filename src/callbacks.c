@@ -558,8 +558,8 @@ evol=create_VolsE();
 gtk_widget_show(evol);
 gtk_widget_hide(pres);
 
-//treeview=lookup_widget(evol,"treeviewvol");
-//affichervol(treeview) ; 
+treeview=lookup_widget(evol,"treeviewvol");
+affichervol(treeview) ; 
 
 
 
@@ -577,8 +577,8 @@ eloc=create_LocationE();
 gtk_widget_show(eloc);
 gtk_widget_hide(pres);
 
-//treeview=lookup_widget(eloc,"treeviewlocation");
-//afficherlocation(treeview) ; 
+treeview=lookup_widget(eloc,"treeviewlocation");
+afficherlocation(treeview) ; 
 }
 
 
@@ -593,8 +593,8 @@ ehyber=create_HybergementE();
 gtk_widget_show(ehyber);
 gtk_widget_hide(pres);
 
-//treeview=lookup_widget(ehyber,"treeviewhyber");
-//afficherhybergement(treeview) ; 
+treeview=lookup_widget(ehyber,"treeviewhyber");
+afficherhybergement(treeview) ; 
 
 }
 
@@ -1029,7 +1029,7 @@ char datealler[30];
 char dateretour[30];
 char prix[30];
 
-GtkWidget *inputdepart,*inputdesti ,*inputheure ,*inputddepart ,*inpudretour,*inputprix, *inputcomp ;  
+GtkWidget *inputdepart,*inputdesti ,*inputheure ,*inputddepart ,*inpudretour,*inputprix, *inputcomp ,*treeview;  
 
 
 inputdepart=lookup_widget(objet_graphique,"entrydepart"); 
@@ -1058,6 +1058,9 @@ vole=create_VolsE();
 gtk_widget_show(vole);
 gtk_widget_hide(ajoutvol);
 
+treeview=lookup_widget(vole,"treeviewvol");
+affichervol(treeview) ; 
+
 }
 
 
@@ -1073,8 +1076,8 @@ vole=create_VolsE();
 gtk_widget_show(vole);
 gtk_widget_hide(ajoutvol);
 
-//treeview=lookup_widget(vole,"treeviewvol");
-//affichervol(treeview) ; 
+treeview=lookup_widget(vole,"treeviewvol");
+affichervol(treeview) ; 
 }
 
 
@@ -1119,8 +1122,8 @@ hyber=create_HybergementE();
 gtk_widget_show(hyber);
 gtk_widget_hide(ajouthyber);
 
-//treeview=lookup_widget(hyber,"treeviewhyber");
-//afficherhybergement(treeview) ; 
+treeview=lookup_widget(hyber,"treeviewhyber");
+afficherhybergement(treeview) ; 
 }
 
 
@@ -1128,7 +1131,7 @@ void
 on_buttonvaliderhyber_clicked          (GtkWidget       *objet_graphique,
                                         gpointer         user_data)
 {
-GtkWidget *ajouthyber ,*hyberg;
+GtkWidget *ajouthyber ,*hyberg ,*treeview;
 
 FILE *f;
 
@@ -1155,6 +1158,9 @@ hyberg=create_HybergementE();
 gtk_widget_show(hyberg);
 gtk_widget_hide(ajouthyber);
 
+treeview=lookup_widget(hyberg,"treeviewhyber");
+afficherhybergement(treeview) ; 
+
 }
 
 
@@ -1169,8 +1175,8 @@ loc=create_LocationE();
 gtk_widget_show(loc);
 gtk_widget_hide(ajoutloc);
 
-//treeview=lookup_widget(loc,"treeviewlocation");
-//afficherlocation(treeview) ; 
+treeview=lookup_widget(loc,"treeviewlocation");
+afficherlocation(treeview) ; 
 
 }
 
@@ -1185,7 +1191,7 @@ FILE *f;
 
 loc l ; 
 
-GtkWidget *inputmarq,*inputprix ;  
+GtkWidget *inputmarq,*inputprix ,*treeview ;  
 
 
  
@@ -1204,6 +1210,9 @@ ajouterlocation(l);
 loca=create_LocationE();
 gtk_widget_show(loca);
 gtk_widget_hide(ajoutloc);
+
+treeview=lookup_widget(loca,"treeviewlocation");
+afficherlocation(treeview) ; 
 
 }
 
@@ -1595,12 +1604,15 @@ void
 on_buttonretourmodvoltogvol_clicked    (GtkWidget       *objet_graphique,
                                         gpointer         user_data)
 {
-GtkWidget *modif ,*gemp ;
+GtkWidget *modif ,*gemp ,*treeview ;
 
 modif=lookup_widget(objet_graphique,"modifiervol");
 gemp=create_VolsE();
 gtk_widget_show(gemp);
 gtk_widget_hide(modif); 
+
+treeview=lookup_widget(gemp,"treeviewvol");
+affichervol(treeview) ; 
 }
 
 
@@ -1646,8 +1658,8 @@ gemp=create_VolsE();
 gtk_widget_show(gemp);
 gtk_widget_hide(modif); 
 
-/*treeview=lookup_widget(gemp,"treeviewvol");
-affichervol(treeview) ; */
+treeview=lookup_widget(gemp,"treeviewvol");
+affichervol(treeview) ; 
 
 
 }
@@ -1680,17 +1692,15 @@ strcpy(compagnie,gtk_entry_get_text(GTK_ENTRY(comp)));
 
 supprimervol(depart,destination,compagnie);
 
-/*treeview=lookup_widget(gclient,"treeviewEclient");
-afficherclient(treeview) ; 
-*/
-
-
 
 
 modif=lookup_widget(objet_graphique,"supprimervol");
 gemp=create_VolsE();
 gtk_widget_show(gemp);
 gtk_widget_hide(modif); 
+
+treeview=lookup_widget(gemp,"treeviewvol");
+affichervol(treeview) ; 
 }
 
 
@@ -1698,12 +1708,17 @@ void
 on_buttonretoursuppvoltogvol_clicked   (GtkWidget       *objet_graphique,
                                         gpointer         user_data)
 {
-GtkWidget *modif ,*gemp ;
+GtkWidget *modif ,*gemp ,*treeview;
 
 modif=lookup_widget(objet_graphique,"supprimervol");
 gemp=create_VolsE();
 gtk_widget_show(gemp);
 gtk_widget_hide(modif); 
+
+treeview=lookup_widget(gemp,"treeviewvol");
+affichervol(treeview) ; 
+
+
 }
 
 
@@ -1731,19 +1746,24 @@ char hotel[50];
 
   
 GtkWidget *inputhot  ;
-//GtkWidget *treeview ;
-//GtkWidget *modif ,*gemp ;
+GtkWidget *treeview ;
+GtkWidget *gemp ,*modif ;
 
 
 inputhot=lookup_widget(objet_graphique,"entryrecherchesupphotel"); 
-
+modif=lookup_widget(objet_graphique,"HybergementE");
 
 strcpy(hotel,gtk_entry_get_text(GTK_ENTRY(inputhot)));
 supprimerhyber(hotel);
 
-/*treeview=lookup_widget(gclient,"treeviewEclient");
-afficherclient(treeview) ; 
-*/
+
+gemp=create_HybergementE();
+gtk_widget_show(gemp);
+gtk_widget_hide(modif); 
+
+
+treeview=lookup_widget(gemp,"treeviewhyber");
+afficherhybergement(treeview) ; 
 
 }
 
@@ -1758,7 +1778,7 @@ char prix[50];
 
   
 GtkWidget *inputhot  ,*nvprix ;
-//GtkWidget *treeview ;
+GtkWidget *treeview ;
 GtkWidget *modif ,*gemp ;
 
 
@@ -1770,14 +1790,15 @@ strcpy(prix,gtk_entry_get_text(GTK_ENTRY(nvprix)));
 
 modifierhyber (hotel,prix);
 
-/*treeview=lookup_widget(gclient,"treeviewEclient");
-afficherclient(treeview) ; 
-*/
+
 
 modif=lookup_widget(objet_graphique,"modifierhotel");
 gemp=create_HybergementE();
 gtk_widget_show(gemp);
 gtk_widget_hide(modif); 
+
+treeview=lookup_widget(gemp,"treeviewhyber");
+afficherhybergement(treeview) ; 
 }
 
 
@@ -1786,12 +1807,15 @@ on_buttonretourmodifhoteltohotel_clicked
                                         (GtkWidget       *objet_graphique,
                                         gpointer         user_data)
 {
-GtkWidget *modif ,*gemp ;
+GtkWidget *modif ,*gemp ,*treeview ;
 
 modif=lookup_widget(objet_graphique,"modifierhotel");
 gemp=create_HybergementE();
 gtk_widget_show(gemp);
 gtk_widget_hide(modif); 
+
+treeview=lookup_widget(gemp,"treeviewhyber");
+afficherhybergement(treeview) ; 
 }
 
 char marquedevoiture[50] ;
@@ -1822,21 +1846,21 @@ char marque[50];
 
   
 GtkWidget *inputmarque  ;
-//GtkWidget *treeview ;
-//GtkWidget *modif ,*gemp ;
+GtkWidget *treeview ;
+GtkWidget *gemp ,*modif ;
 
 
 inputmarque=lookup_widget(objet_graphique,"entryrecherchesupploc"); 
-
+modif=lookup_widget(objet_graphique,"LocationE");
 
 strcpy(marque,gtk_entry_get_text(GTK_ENTRY(inputmarque)));
 supprimerloc(marque);
 
-
-/*treeview=lookup_widget(gclient,"treeviewEclient");
-afficherclient(treeview) ; 
-*/
-
+gemp=create_LocationE();
+gtk_widget_show(gemp);
+gtk_widget_hide(modif);
+treeview=lookup_widget(gemp,"treeviewlocation");
+afficherlocation(treeview) ; 
 }
 
 
@@ -1845,12 +1869,15 @@ on_buttonretourmodifierloctogloc_clicked
                                         (GtkWidget       *objet_graphique,
                                         gpointer         user_data)
 {
-GtkWidget *modif ,*gemp ;
+GtkWidget *modif ,*gemp ,*treeview;
 
 modif=lookup_widget(objet_graphique,"modifierlocation");
 gemp=create_LocationE();
 gtk_widget_show(gemp);
 gtk_widget_hide(modif); 
+
+treeview=lookup_widget(gemp,"treeviewlocation");
+afficherlocation(treeview) ; 
 }
 
 
@@ -1864,7 +1891,7 @@ char prix[50];
 
   
 GtkWidget *nvprix ;
-//GtkWidget *treeview ;
+GtkWidget *treeview ;
 GtkWidget *modif ,*gemp ;
 
 
@@ -1876,14 +1903,15 @@ strcpy(prix,gtk_entry_get_text(GTK_ENTRY(nvprix)));
 
 modifierloc(marquedevoiture,prix);
 
-/*treeview=lookup_widget(gclient,"treeviewEclient");
-afficherclient(treeview) ; 
-*/
+
 
 modif=lookup_widget(objet_graphique,"modifierlocation");
 gemp=create_LocationE();
 gtk_widget_show(gemp);
 gtk_widget_hide(modif); 
+
+treeview=lookup_widget(gemp,"treeviewlocation");
+afficherlocation(treeview) ; 
 
 }
 
@@ -2145,5 +2173,84 @@ modif=lookup_widget(objet_graphique,"Location");
 gemp=create_ModeClient();
 gtk_widget_show(gemp);
 gtk_widget_hide(modif); 
+}
+
+
+void
+on_buttonPanier_clicked                (GtkWidget        *objet_graphique,
+                                        gpointer         user_data)
+{
+GtkWidget *modif ,*gemp ;
+
+modif=lookup_widget(objet_graphique,"ModeClient");
+gemp=create_panier();
+gtk_widget_show(gemp);
+gtk_widget_hide(modif); 
+}
+
+
+void
+on_buttonretourvaliderreservationtomodeclient_clicked    (GtkWidget        *objet_graphique,
+                                                           gpointer         user_data)
+{
+GtkWidget *modif ,*gemp ;
+
+modif=lookup_widget(objet_graphique,"panier");
+gemp=create_ModeClient();
+gtk_widget_show(gemp);
+gtk_widget_hide(modif); 
+}
+
+
+void
+on_buttonvaliderreservation_clicked    (GtkWidget        *objet_graphique,
+                                        gpointer         user_data)
+{
+
+GtkWidget *modif ,*gemp ;
+
+modif=lookup_widget(objet_graphique,"panier");
+gemp=create_merci();
+gtk_widget_show(gemp);
+gtk_widget_hide(modif); 
+
+stockage();  
+}
+
+
+void
+on_buttonafficherreservation_clicked   (GtkWidget        *objet_graphique,
+                                        gpointer         user_data)
+{
+GtkWidget *ciin ,*pani ,*treeview; 
+char cin[50]; 
+
+pani=lookup_widget(objet_graphique,"panier");
+ciin=lookup_widget(objet_graphique,"entrycinreservation");
+
+strcpy(cin,gtk_entry_get_text(GTK_ENTRY(ciin)));
+reservtotal(cin); 
+
+treeview=lookup_widget(pani,"treeviewpanier");
+afficherreservation (treeview) ;
+
+
+
+}
+
+
+
+void
+on_buttonok_clicked                    (GtkWidget        *objet_graphique,
+                                        gpointer         user_data)
+{
+GtkWidget *modif ,*gemp ;
+
+modif=lookup_widget(objet_graphique,"merci");
+gemp=create_ModeClient();
+gtk_widget_show(gemp);
+gtk_widget_hide(modif); 
+
+effacer() ; 
 }
 

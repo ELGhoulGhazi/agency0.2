@@ -39,3 +39,5 @@ GtkWidget* create_modifiervol (void);
 GtkWidget* create_supprimervol (void);
 GtkWidget* create_modifierhotel (void);
 GtkWidget* create_modifierlocation (void);
+GtkWidget* create_panier (void);
+GtkWidget* create_merci (void);
