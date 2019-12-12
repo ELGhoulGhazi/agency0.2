@@ -172,7 +172,7 @@ return ;
 else 
 {
 f=fopen("/home/ggmghoul/Desktop/agency-master/src/voldispo.txt","a+") ;
- while(fscanf(f," %s %s %s %s %s %s %s \n" ,depart,destination,heure,compagnie,da,dr,prix)!=EOF) 
+ while(fscanf(f,"%s %s %s %s %s %s %s \n" ,depart,destination,heure,compagnie,da,dr,prix)!=EOF) 
 {
 gtk_list_store_append (store,&iter) ; 
 gtk_list_store_set (store,&iter,DEPART,depart,DESTINATION,destination,HEUREDEDEPART,heure,COMPAGNIE,compagnie,DATEALLER,da,DATERETOUR,dr,PRIX,prix,-1) ; 
@@ -247,7 +247,7 @@ return ;
 else 
 {
 f=fopen("/home/ggmghoul/Desktop/agency-master/src/hyberdispo.txt","a+") ;
- while(fscanf(f," %s %s %s \n" ,h.pays,h.hotel,h.prix)!=EOF) 
+ while(fscanf(f,"%s %s %s \n" ,h.pays,h.hotel,h.prix)!=EOF) 
 {
 gtk_list_store_append (store,&iter) ; 
 gtk_list_store_set (store,&iter,PAYS,h.pays,HOTEL,h.hotel,PRIX0,h.prix,-1) ; 
@@ -879,6 +879,16 @@ void effacer()
 {
 remove ("/home/ggmghoul/Desktop/agency-master/src/reservationtotale.txt");
 	rename ("/home/ggmghoul/Desktop/agency-master/src/reservationtotale1.txt","/home/ggmghoul/Desktop/agency-master/src/reservationtotale.txt");
+
+remove ("/home/ggmghoul/Desktop/agency-master/src/reservationvol.txt");
+	rename ("/home/ggmghoul/Desktop/agency-master/src/reservationvol1.txt","/home/ggmghoul/Desktop/agency-master/src/reservationvol.txt");
+
+remove ("/home/ggmghoul/Desktop/agency-master/src/reservationlocation.txt");
+	rename ("/home/ggmghoul/Desktop/agency-master/src/reservationlocation1.txt","/home/ggmghoul/Desktop/agency-master/src/reservationlocation.txt");
+
+remove ("/home/ggmghoul/Desktop/agency-master/src/reservationhyber.txt");
+	rename ("/home/ggmghoul/Desktop/agency-master/src/reservationhyber1.txt","/home/ggmghoul/Desktop/agency-master/src/reservationhyber.txt");
+
 
 }
 

@@ -1513,7 +1513,7 @@ inputpass=lookup_widget(objet_graphique,"entrynouveaupassemp");
 
 strcpy(user,gtk_entry_get_text(GTK_ENTRY(inputuser)));
 strcpy(pass,gtk_entry_get_text(GTK_ENTRY(inputpass)));
-modifierclient (name1,user,pass) ; 
+modifieremployer(name1,user,pass) ; 
 
 treeview=lookup_widget(gemp,"treeviewemp");
 afficheremp(treeview) ;

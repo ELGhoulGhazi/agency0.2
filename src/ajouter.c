@@ -247,7 +247,7 @@ f1=fopen("/home/ggmghoul/Desktop/agency-master/src/empinfo1.txt","w");
 if (f!=NULL){
     if(f1!=NULL){
 while(fscanf(f,"%s %s %s %s %s \n" ,e.nom,e.prenom,e.date,e.user,e.password)!=EOF ) {
-    if(strcmp(name,e.nom)!=0){
+    if(strcmp(name,e.user)!=0){
         fprintf(f1,"%s %s %s %s %s \n" ,e.nom,e.prenom,e.date,e.user,e.password);
         r=1;
     }
