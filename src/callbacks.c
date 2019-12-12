@@ -661,12 +661,15 @@ void
 on_buttonrecA_clicked                  (GtkWidget       *objet_graphique,
                                         gpointer         user_data)
 {
-GtkWidget *rec ,*admin;
+GtkWidget *rec ,*admin ,*treeview;
 
 admin=lookup_widget(objet_graphique,"ModeAdmin");
 rec=create_reclamation();
 gtk_widget_show(rec);
 gtk_widget_hide(admin);
+
+treeview=lookup_widget(rec,"treeviewrecadmin");
+afficherrec(treeview) ; 
 }
 
 
@@ -690,12 +693,15 @@ void
 on_buttonrecE_clicked                  (GtkWidget       *objet_graphique,
                                         gpointer         user_data)
 {
-GtkWidget *rec ,*emp;
+GtkWidget *rec ,*emp ,*treeview;
 
 emp=lookup_widget(objet_graphique,"ModeEmploye");
 rec=create_reclamationE();
 gtk_widget_show(rec);
 gtk_widget_hide(emp);
+
+treeview=lookup_widget(rec,"treeviewreclamationemp");
+afficherrec(treeview) ; 
 }
 
 
@@ -2384,22 +2390,134 @@ void
 on_buttonenvoyerrecluser_clicked       (GtkWidget        *objet_graphique,
                                         gpointer         user_data)
 {
-GtkWidget *modif ,*gemp ,*ciin , *mess ;
+GtkWidget *modif ,*gemp ,*ciin , *mess ,*type ,*jj ,*mm ,*yy ;
 
 char cin[50]; 
 char message1[3000]; 
+char type1[50]; 
+int j ; 
+int m ; 
+int y ; 
 
 ciin=lookup_widget(objet_graphique,"entrycinrecuser");
 mess=lookup_widget(objet_graphique,"entryrecuser");
+type=lookup_widget(objet_graphique,"comboboxreclamation");
+jj=lookup_widget(objet_graphique,"spinbuttonrecj");
+mm=lookup_widget(objet_graphique,"spinbuttonrecm");
+yy=lookup_widget(objet_graphique,"spinbuttonrecy");
 
 strcpy(cin,gtk_entry_get_text(GTK_ENTRY(ciin)));
 strcpy(message1,gtk_entry_get_text(GTK_ENTRY(mess)));
+strcpy(type1,gtk_combo_box_get_active_text(GTK_COMBO_BOX(type)));
+j=gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(jj));
+m=gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(mm));
+y=gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(yy));
 
-reclamer(cin,message1);
+reclamer(cin,message1,type1,j,m,y);
 
 modif=lookup_widget(objet_graphique,"reclamer");
 gemp=create_ModeClient();
 gtk_widget_show(gemp);
 gtk_widget_hide(modif); 
+}
+
+
+
+void
+on_buttontraiter_clicked               (GtkWidget        *objet_graphique,
+                                        gpointer         user_data)
+{
+FILE *f ; 
+GtkWidget *rec ,*ciin ,*rec1 ,*treeview ;
+
+char cin[50] ; 
+
+ciin=lookup_widget(objet_graphique,"entryciinrecemp");
+strcpy(cin,gtk_entry_get_text(GTK_ENTRY(ciin)));
+
+modifieretat(cin);
+
+rec=lookup_widget(objet_graphique,"reclamationE");
+rec1=create_reclamationE(); 
+gtk_widget_show(rec1);
+gtk_widget_hide(rec);
+
+treeview=lookup_widget(rec1,"treeviewreclamationemp");
+afficherrec(treeview) ; 
+
+
+
+}
+
+
+void
+on_buttonsupprec_clicked               (GtkWidget        *objet_graphique,
+                                        gpointer         user_data)
+{
+FILE *f ; 
+GtkWidget *rec ,*ciin ,*rec1 ,*treeview ;
+
+char cin[50] ; 
+
+ciin=lookup_widget(objet_graphique,"entryciinrecemp");
+strcpy(cin,gtk_entry_get_text(GTK_ENTRY(ciin)));
+
+supprimerrec(cin);
+
+rec=lookup_widget(objet_graphique,"reclamationE");
+rec1=create_reclamationE(); 
+gtk_widget_show(rec1);
+gtk_widget_hide(rec);
+
+treeview=lookup_widget(rec1,"treeviewreclamationemp");
+afficherrec(treeview) ; 
+}
+
+
+void
+on_buttontraiteradmin_clicked          (GtkWidget        *objet_graphique,
+                                        gpointer         user_data)
+{
+FILE *f ; 
+GtkWidget *rec ,*ciin ,*rec1 ,*treeview ;
+
+char cin[50] ; 
+
+ciin=lookup_widget(objet_graphique,"entrycinrecadmin");
+strcpy(cin,gtk_entry_get_text(GTK_ENTRY(ciin)));
+
+modifieretat(cin);
+
+rec=lookup_widget(objet_graphique,"reclamation");
+rec1=create_reclamation(); 
+gtk_widget_show(rec1);
+gtk_widget_hide(rec);
+
+treeview=lookup_widget(rec1,"treeviewrecadmin");
+afficherrec(treeview) ; 
+}
+
+
+void
+on_buttonsuppadmin_clicked             (GtkWidget        *objet_graphique,
+                                        gpointer         user_data)
+{
+FILE *f ; 
+GtkWidget *rec ,*ciin ,*rec1 ,*treeview ;
+
+char cin[50] ; 
+
+ciin=lookup_widget(objet_graphique,"entrycinrecadmin");
+strcpy(cin,gtk_entry_get_text(GTK_ENTRY(ciin)));
+
+supprimerrec(cin);
+
+rec=lookup_widget(objet_graphique,"reclamation");
+rec1=create_reclamation(); 
+gtk_widget_show(rec1);
+gtk_widget_hide(rec);
+
+treeview=lookup_widget(rec1,"treeviewrecadmin");
+afficherrec(treeview) ; 
 }
 

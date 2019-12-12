@@ -779,7 +779,7 @@ return ;
 else 
 {
 f=fopen("/home/ggmghoul/Desktop/agency-master/src/reservationtotale.txt","a+") ;
- while(fscanf(f,"%s %s \n" ,reserv,prix)!=EOF) 
+ while(fscanf(f,"%s %s %s \n" ,cin,reserv,prix)!=EOF) 
 {
 gtk_list_store_append (store,&iter) ; 
 gtk_list_store_set (store,&iter,CIN,cin,VOSRESERVATION,reserv,PRIX1,prix,-1) ; 
@@ -830,7 +830,7 @@ while(fscanf(f1,"%s %s %s %d %d %s %d \n",hc.cin,hc.pays,hc.hotel,&hc.jd,&hc.nbp
                 }
 while(fscanf(f2,"%s %s %d %d \n",lc.cin,lc.marque,&lc.nbj,&lc.prix)!=EOF )
                 { 
-                 if (strcmp(cin,hc.cin)==0) 
+                 if (strcmp(cin,lc.cin)==0) 
              fprintf(f3,"%s %s %d \n",lc.cin,lc.marque,lc.prix) ;  
                 }
 
@@ -1003,13 +1003,15 @@ if (r){
 
 /*----------------------envoyerrec---------------------------------------------------------------------*/
 
-void reclamer(char cin[] ,char message[]) 
+void reclamer(char cin[] ,char message[] ,char type[],int j ,int m , int y ) 
 {
 FILE *f;
 
+char etat[50]="NonTraitée" ;
+
 f=fopen("/home/ggmghoul/Desktop/agency-master/src/reclamation.txt","a");
 if(f!=NULL)
-{fprintf(f,"%s %s \n",cin,message);
+{fprintf(f,"%s %s %d/%d/%d %s %s \n",cin,type,j,m,y,etat,message);
 fclose(f);
 }
 }
@@ -1018,14 +1020,17 @@ fclose(f);
 /*---------------------------afficherrec-------------------------------------------------*/
 
 
-/*
+
 enum 
 {
 CIN1 , 
 MESSAGE1 , 
+TYPE1,
+DATE1,
+ETAT1,
 COLUMNS111 
 };
-void affichermessage (GtkTreeView *liste) 
+void afficherrec (GtkTreeView *liste) 
 {
 GtkCellRenderer *render ;
 GtkTreeViewColumn *column ; 
@@ -1035,6 +1040,10 @@ GtkListStore *store ;
 
 char cin[50]; 
 char message[3000];
+char type[50]; 
+char date[50]; 
+char etat[50]; 
+
  
 
 store=NULL ; 
@@ -1052,13 +1061,28 @@ render=gtk_cell_renderer_text_new () ;
 column =gtk_tree_view_column_new_with_attributes("Reclamation",render,"text",MESSAGE1,NULL) ; 
 gtk_tree_view_append_column (GTK_TREE_VIEW(liste),column); 
 
+render=gtk_cell_renderer_text_new () ; 
+column =gtk_tree_view_column_new_with_attributes("Type",render,"text",TYPE1,NULL) ; 
+gtk_tree_view_append_column (GTK_TREE_VIEW(liste),column); 
+
+render=gtk_cell_renderer_text_new () ; 
+column =gtk_tree_view_column_new_with_attributes("Date",render,"text",DATE1,NULL) ; 
+gtk_tree_view_append_column (GTK_TREE_VIEW(liste),column); 
+
+
+render=gtk_cell_renderer_text_new () ; 
+column =gtk_tree_view_column_new_with_attributes("Etat",render,"text",ETAT1,NULL) ; 
+gtk_tree_view_append_column (GTK_TREE_VIEW(liste),column); 
 
 
 
 
 
 
-store=gtk_list_store_new(COLUMNS111,G_TYPE_STRING,G_TYPE_STRING) ; 
+
+
+
+store=gtk_list_store_new(COLUMNS111,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING) ; 
 
 f=fopen("/home/ggmghoul/Desktop/agency-master/src/reclamation.txt","r") ; 
 if (f==NULL) 
@@ -1068,18 +1092,97 @@ return ;
 else 
 {
 f=fopen("/home/ggmghoul/Desktop/agency-master/src/reclamation.txt","a+") ;
- while(fscanf(f,"%s %[^\n]s \n",cin,message)!=EOF) 
+ while(fscanf(f,"%s %s %s %s %[^\n]s \n",cin,type,date,etat,message)!=EOF) 
 {
 gtk_list_store_append (store,&iter) ; 
-gtk_list_store_set (store,&iter,CIN1,cin,MESSAGE1,message,-1) ; 
+gtk_list_store_set (store,&iter,CIN1,cin,MESSAGE1,message,TYPE1,type,DATE1,date,ETAT1,etat,-1) ; 
 }
 fclose(f) ; }
 gtk_tree_view_set_model(GTK_TREE_VIEW (liste),GTK_TREE_MODEL (store)); 
 g_object_unref (store) ; 
 }
-}*/
+}
 
 
-/*---------------------------------------------------------------------------------------*/
+/*---------------------------------------------Modifieretat---------------------------------*/
 
+
+void modifieretat(char cin1[])
+{
+FILE *f;
+FILE *f1;
+ 
+int r;
+char etat1[50]="Traitée";
+char cin[50]; 
+char message[3000];
+char type[50]; 
+char date[50]; 
+char etat[50]; 
+
+f=fopen("/home/ggmghoul/Desktop/agency-master/src/reclamation.txt","r");
+f1=fopen("/home/ggmghoul/Desktop/agency-master/src/reclamation1.txt","w");
+if (f!=NULL)
+{
+    if(f1!=NULL)
+     {
+while(fscanf(f,"%s %s %s %s %[^\n]s \n",cin,type,date,etat,message)!=EOF ) 
+{
+    if(strcmp(cin1,cin)==0)  
+            {
+        fprintf(f1,"%s %s %s %s %s \n",cin,type,date,etat1,message);
+            }
+     else 
+          {fprintf(f1,"%s %s %s %s %s \n",cin,type,date,etat,message);} 
+}
+}
+}
+fclose(f1);
+fclose(f);
+
+	remove ("/home/ggmghoul/Desktop/agency-master/src/reclamation.txt");
+	rename ("/home/ggmghoul/Desktop/agency-master/src/reclamation1.txt","/home/ggmghoul/Desktop/agency-master/src/reclamation.txt");
+	
+}
+
+/*---------------------------------------------Supprimerrec---------------------------------*/
+
+void supprimerrec(char cin1[])
+
+{
+FILE *f;
+FILE *f1;
+
+int r;
+int n;
+
+char cin[50]; 
+char message[3000];
+char type[50]; 
+char date[50]; 
+char etat[50]; 
+
+
+f=fopen("/home/ggmghoul/Desktop/agency-master/src/reclamation.txt","r");
+f1=fopen("/home/ggmghoul/Desktop/agency-master/src/reclamation1.txt","w");
+if (f!=NULL){
+    if(f1!=NULL){
+while(fscanf(f,"%s %s %s %s %[^\n]s \n",cin,type,date,etat,message)!=EOF ) {
+    if(strcmp(cin1,cin)!=0)  
+    {
+        fprintf(f1,"%s %s %s %s %s \n",cin,type,date,etat,message);
+        r=1;
+    }
+}
+    }
+    fclose(f1);
+}
+
+fclose(f);
+if (r){
+	remove ("/home/ggmghoul/Desktop/agency-master/src/reclamation.txt");
+	rename ("/home/ggmghoul/Desktop/agency-master/src/reclamation1.txt","/home/ggmghoul/Desktop/agency-master/src/reclamation.txt");
+	}
+
+}
 

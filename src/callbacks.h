@@ -490,3 +490,21 @@ on_buttonsuppmessageemp_clicked        (GtkWidget        *objet_graphique,
 void
 on_buttonenvoyerrecluser_clicked       (GtkWidget        *objet_graphique,
                                         gpointer         user_data);
+
+
+
+void
+on_buttontraiter_clicked               (GtkWidget        *objet_graphique,
+                                        gpointer         user_data);
+
+void
+on_buttonsupprec_clicked               (GtkWidget        *objet_graphique,
+                                        gpointer         user_data);
+
+void
+on_buttontraiteradmin_clicked          (GtkWidget        *objet_graphique,
+                                        gpointer         user_data);
+
+void
+on_buttonsuppadmin_clicked             (GtkWidget        *objet_graphique,
+                                        gpointer         user_data);
