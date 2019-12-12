@@ -2379,3 +2379,27 @@ treeview=lookup_widget(gemp,"treeviewmessageemp");
 affichermessage(treeview) ; 
 }
 
+
+void
+on_buttonenvoyerrecluser_clicked       (GtkWidget        *objet_graphique,
+                                        gpointer         user_data)
+{
+GtkWidget *modif ,*gemp ,*ciin , *mess ;
+
+char cin[50]; 
+char message1[3000]; 
+
+ciin=lookup_widget(objet_graphique,"entrycinrecuser");
+mess=lookup_widget(objet_graphique,"entryrecuser");
+
+strcpy(cin,gtk_entry_get_text(GTK_ENTRY(ciin)));
+strcpy(message1,gtk_entry_get_text(GTK_ENTRY(mess)));
+
+reclamer(cin,message1);
+
+modif=lookup_widget(objet_graphique,"reclamer");
+gemp=create_ModeClient();
+gtk_widget_show(gemp);
+gtk_widget_hide(modif); 
+}
+

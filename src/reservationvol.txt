@@ -1,1 +1,3 @@
 123456 france usa 12h tunisair aller/retour 12/12/2019 30/12/2019 Economique 1 1 1 -44962 
+123 france usa 12h tunisair aller/retour 12/12/2019 30/12/2019 FirstClass 1 1 1 -89924 
+123 france usa 12h tunisair aller/retour 12/12/2019 30/12/2019 FirstClass 1 1 1 -89924 

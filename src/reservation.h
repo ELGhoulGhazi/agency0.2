@@ -114,4 +114,7 @@ void messgae(char cin[] ,char message[]);
 void affichermessage (GtkTreeView *liste) ;
 void suppmsg(char cin[]);
 
+
+void reclamer(char cin[] ,char message[]) ;
+
 //int departdestdispo (char depart[][30] ,char destination[][30]);

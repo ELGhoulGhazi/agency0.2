@@ -997,3 +997,89 @@ if (r){
 	}
 
 }
+
+
+
+
+/*----------------------envoyerrec---------------------------------------------------------------------*/
+
+void reclamer(char cin[] ,char message[]) 
+{
+FILE *f;
+
+f=fopen("/home/ggmghoul/Desktop/agency-master/src/reclamation.txt","a");
+if(f!=NULL)
+{fprintf(f,"%s %s \n",cin,message);
+fclose(f);
+}
+}
+
+
+/*---------------------------afficherrec-------------------------------------------------*/
+
+
+/*
+enum 
+{
+CIN1 , 
+MESSAGE1 , 
+COLUMNS111 
+};
+void affichermessage (GtkTreeView *liste) 
+{
+GtkCellRenderer *render ;
+GtkTreeViewColumn *column ; 
+GtkTreeIter iter ; 
+
+GtkListStore *store ;
+
+char cin[50]; 
+char message[3000];
+ 
+
+store=NULL ; 
+FILE* f ; 
+
+store=gtk_tree_view_get_model(liste) ; 
+if (store==NULL) 
+{
+
+render=gtk_cell_renderer_text_new () ; 
+column =gtk_tree_view_column_new_with_attributes("Cin",render,"text",CIN1,NULL) ; 
+gtk_tree_view_append_column (GTK_TREE_VIEW(liste),column); 
+
+render=gtk_cell_renderer_text_new () ; 
+column =gtk_tree_view_column_new_with_attributes("Reclamation",render,"text",MESSAGE1,NULL) ; 
+gtk_tree_view_append_column (GTK_TREE_VIEW(liste),column); 
+
+
+
+
+
+
+
+store=gtk_list_store_new(COLUMNS111,G_TYPE_STRING,G_TYPE_STRING) ; 
+
+f=fopen("/home/ggmghoul/Desktop/agency-master/src/reclamation.txt","r") ; 
+if (f==NULL) 
+{
+return ; 
+}
+else 
+{
+f=fopen("/home/ggmghoul/Desktop/agency-master/src/reclamation.txt","a+") ;
+ while(fscanf(f,"%s %[^\n]s \n",cin,message)!=EOF) 
+{
+gtk_list_store_append (store,&iter) ; 
+gtk_list_store_set (store,&iter,CIN1,cin,MESSAGE1,message,-1) ; 
+}
+fclose(f) ; }
+gtk_tree_view_set_model(GTK_TREE_VIEW (liste),GTK_TREE_MODEL (store)); 
+g_object_unref (store) ; 
+}
+}*/
+
+
+/*---------------------------------------------------------------------------------------*/
+
+

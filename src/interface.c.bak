@@ -2854,13 +2854,13 @@ create_contacter (void)
   GtkWidget *buttonretourCC;
   GtkWidget *image51;
   GtkWidget *entrycincontacter;
+  GtkWidget *entrymessagecontacter;
   GtkWidget *label188;
   GtkWidget *buttonenvoyermessage;
   GtkWidget *alignment41;
   GtkWidget *hbox41;
   GtkWidget *image114;
   GtkWidget *label189;
-  GtkWidget *entrymessagecontacter;
 
   contacter = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (contacter), _("Contactez-Nous"));
@@ -2889,6 +2889,12 @@ create_contacter (void)
   gtk_widget_set_size_request (entrycincontacter, 172, 34);
   gtk_entry_set_invisible_char (GTK_ENTRY (entrycincontacter), 8226);
 
+  entrymessagecontacter = gtk_entry_new ();
+  gtk_widget_show (entrymessagecontacter);
+  gtk_fixed_put (GTK_FIXED (fixed22), entrymessagecontacter, 136, 344);
+  gtk_widget_set_size_request (entrymessagecontacter, 928, 56);
+  gtk_entry_set_invisible_char (GTK_ENTRY (entrymessagecontacter), 8226);
+
   label188 = gtk_label_new (_("CIN : "));
   gtk_widget_show (label188);
   gtk_fixed_put (GTK_FIXED (fixed22), label188, 184, 280);
@@ -2915,12 +2921,6 @@ create_contacter (void)
   gtk_widget_show (label189);
   gtk_box_pack_start (GTK_BOX (hbox41), label189, FALSE, FALSE, 0);
 
-  entrymessagecontacter = gtk_entry_new ();
-  gtk_widget_show (entrymessagecontacter);
-  gtk_fixed_put (GTK_FIXED (fixed22), entrymessagecontacter, 136, 344);
-  gtk_widget_set_size_request (entrymessagecontacter, 928, 56);
-  gtk_entry_set_invisible_char (GTK_ENTRY (entrymessagecontacter), 8226);
-
   g_signal_connect ((gpointer) buttonretourCC, "clicked",
                     G_CALLBACK (on_buttonretourCC_clicked),
                     NULL);
@@ -2935,13 +2935,13 @@ create_contacter (void)
   GLADE_HOOKUP_OBJECT (contacter, buttonretourCC, "buttonretourCC");
   GLADE_HOOKUP_OBJECT (contacter, image51, "image51");
   GLADE_HOOKUP_OBJECT (contacter, entrycincontacter, "entrycincontacter");
+  GLADE_HOOKUP_OBJECT (contacter, entrymessagecontacter, "entrymessagecontacter");
   GLADE_HOOKUP_OBJECT (contacter, label188, "label188");
   GLADE_HOOKUP_OBJECT (contacter, buttonenvoyermessage, "buttonenvoyermessage");
   GLADE_HOOKUP_OBJECT (contacter, alignment41, "alignment41");
   GLADE_HOOKUP_OBJECT (contacter, hbox41, "hbox41");
   GLADE_HOOKUP_OBJECT (contacter, image114, "image114");
   GLADE_HOOKUP_OBJECT (contacter, label189, "label189");
-  GLADE_HOOKUP_OBJECT (contacter, entrymessagecontacter, "entrymessagecontacter");
 
   return contacter;
 }
@@ -2954,6 +2954,14 @@ create_reclamer (void)
   GtkWidget *image48;
   GtkWidget *buttonretourRC;
   GtkWidget *image52;
+  GtkWidget *entrycinrecuser;
+  GtkWidget *label194;
+  GtkWidget *entryrecuser;
+  GtkWidget *buttonenvoyerrecluser;
+  GtkWidget *alignment44;
+  GtkWidget *hbox44;
+  GtkWidget *image118;
+  GtkWidget *label195;
 
   reclamer = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (reclamer), _("Reclamation"));
@@ -2976,8 +2984,49 @@ create_reclamer (void)
   gtk_widget_show (image52);
   gtk_container_add (GTK_CONTAINER (buttonretourRC), image52);
 
+  entrycinrecuser = gtk_entry_new ();
+  gtk_widget_show (entrycinrecuser);
+  gtk_fixed_put (GTK_FIXED (fixed23), entrycinrecuser, 240, 280);
+  gtk_widget_set_size_request (entrycinrecuser, 172, 34);
+  gtk_entry_set_invisible_char (GTK_ENTRY (entrycinrecuser), 8226);
+
+  label194 = gtk_label_new (_("CIN : "));
+  gtk_widget_show (label194);
+  gtk_fixed_put (GTK_FIXED (fixed23), label194, 184, 280);
+  gtk_widget_set_size_request (label194, 56, 24);
+
+  entryrecuser = gtk_entry_new ();
+  gtk_widget_show (entryrecuser);
+  gtk_fixed_put (GTK_FIXED (fixed23), entryrecuser, 136, 344);
+  gtk_widget_set_size_request (entryrecuser, 928, 56);
+  gtk_entry_set_invisible_char (GTK_ENTRY (entryrecuser), 8226);
+
+  buttonenvoyerrecluser = gtk_button_new ();
+  gtk_widget_show (buttonenvoyerrecluser);
+  gtk_fixed_put (GTK_FIXED (fixed23), buttonenvoyerrecluser, 864, 704);
+  gtk_widget_set_size_request (buttonenvoyerrecluser, 160, 48);
+
+  alignment44 = gtk_alignment_new (0.5, 0.5, 0, 0);
+  gtk_widget_show (alignment44);
+  gtk_container_add (GTK_CONTAINER (buttonenvoyerrecluser), alignment44);
+
+  hbox44 = gtk_hbox_new (FALSE, 2);
+  gtk_widget_show (hbox44);
+  gtk_container_add (GTK_CONTAINER (alignment44), hbox44);
+
+  image118 = gtk_image_new_from_stock ("gtk-media-forward", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (image118);
+  gtk_box_pack_start (GTK_BOX (hbox44), image118, FALSE, FALSE, 0);
+
+  label195 = gtk_label_new_with_mnemonic (_("      Envoyer"));
+  gtk_widget_show (label195);
+  gtk_box_pack_start (GTK_BOX (hbox44), label195, FALSE, FALSE, 0);
+
   g_signal_connect ((gpointer) buttonretourRC, "clicked",
                     G_CALLBACK (on_buttonretourRC_clicked),
+                    NULL);
+  g_signal_connect ((gpointer) buttonenvoyerrecluser, "clicked",
+                    G_CALLBACK (on_buttonenvoyerrecluser_clicked),
                     NULL);
 
   /* Store pointers to all widgets, for use by lookup_widget(). */
@@ -2986,6 +3035,14 @@ create_reclamer (void)
   GLADE_HOOKUP_OBJECT (reclamer, image48, "image48");
   GLADE_HOOKUP_OBJECT (reclamer, buttonretourRC, "buttonretourRC");
   GLADE_HOOKUP_OBJECT (reclamer, image52, "image52");
+  GLADE_HOOKUP_OBJECT (reclamer, entrycinrecuser, "entrycinrecuser");
+  GLADE_HOOKUP_OBJECT (reclamer, label194, "label194");
+  GLADE_HOOKUP_OBJECT (reclamer, entryrecuser, "entryrecuser");
+  GLADE_HOOKUP_OBJECT (reclamer, buttonenvoyerrecluser, "buttonenvoyerrecluser");
+  GLADE_HOOKUP_OBJECT (reclamer, alignment44, "alignment44");
+  GLADE_HOOKUP_OBJECT (reclamer, hbox44, "hbox44");
+  GLADE_HOOKUP_OBJECT (reclamer, image118, "image118");
+  GLADE_HOOKUP_OBJECT (reclamer, label195, "label195");
 
   return reclamer;
 }
