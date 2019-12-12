@@ -1277,7 +1277,20 @@ void
 on_buttonprixlocation_clicked          (GtkWidget       *objet_graphique,
                                         gpointer         user_data)
 {
+GtkWidget *emp , *output , *marqu ; 
+char marque[50]; 
+char price[50]; 
 
+
+emp=lookup_widget(objet_graphique,"Location");
+output=lookup_widget(objet_graphique,"prixlocc"); 
+marqu=lookup_widget(objet_graphique,"comboboxmar"); 
+
+strcpy(marque,gtk_combo_box_get_active_text(GTK_COMBO_BOX(marqu)));
+
+afficherprixloc(marque,price);
+
+gtk_label_set_text(GTK_LABEL(output),price);
 
 }
 
@@ -1360,6 +1373,28 @@ void
 on_buttonvoirprixvol_clicked           (GtkWidget       *objet_graphique,
                                         gpointer         user_data)
 {
+GtkWidget *emp , *output , *dep ,*dest , *comp ; 
+char depart[50]; 
+char destination[50]; 
+char compa[50]; 
+char price[50]; 
+
+
+emp=lookup_widget(objet_graphique,"Vols");
+output=lookup_widget(objet_graphique,"prixvoll"); 
+dep=lookup_widget(objet_graphique,"comboboxentrydepart"); 
+dest= lookup_widget(objet_graphique,"comboboxentrydestination");
+comp= lookup_widget(objet_graphique,"comboboxcompagnie");
+
+strcpy(depart,gtk_combo_box_get_active_text(GTK_COMBO_BOX(dep)));
+strcpy(destination,gtk_combo_box_get_active_text(GTK_COMBO_BOX(dest)));
+strcpy(compa,gtk_combo_box_get_active_text(GTK_COMBO_BOX(comp)));
+
+afficherprixvol(depart,destination,compa,price);
+
+gtk_label_set_text(GTK_LABEL(output),price);
+
+
 
 }
 
@@ -2546,5 +2581,26 @@ gtk_widget_hide(rec);
 
 treeview=lookup_widget(rec1,"treeviewfactures");
 afficherfact(treeview) ; 
+}
+
+
+void
+on_buttonprixhyber_clicked             (GtkWidget        *objet_graphique,
+                                        gpointer         user_data)
+{
+GtkWidget *emp , *output , *hot ; 
+char hotel[50]; 
+char price[50]; 
+
+
+emp=lookup_widget(objet_graphique,"Hybergement");
+output=lookup_widget(objet_graphique,"prixhyberr"); 
+hot=lookup_widget(objet_graphique,"comboboxhotel"); 
+
+strcpy(hotel,gtk_combo_box_get_active_text(GTK_COMBO_BOX(hot)));
+
+afficherprixhyber(hotel,price);
+
+gtk_label_set_text(GTK_LABEL(output),price);
 }
 

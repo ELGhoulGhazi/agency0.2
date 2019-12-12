@@ -1305,3 +1305,92 @@ if (r){
 }
 
 
+/*----------------------------------prixvol--------------------------------------*/
+
+
+void afficherprixvol(char depart[] ,char dest[] ,char comp[] ,char prix[])
+{
+
+vollemp ev ;  
+
+
+
+
+FILE *f;
+ 
+int r;
+
+f=fopen("/home/ggmghoul/Desktop/agency-master/src/voldispo.txt","r");
+
+if (f!=NULL)
+{
+while(fscanf(f,"%s %s %s %s %s %s %s \n",ev.depart,ev.destination,ev.heure,ev.compagnie,ev.datealler,ev.dateretour,ev.prix)!=EOF ) 
+{
+    if((strcmp(depart,ev.depart)==0) && (strcmp(dest,ev.destination)==0) && (strcmp(comp,ev.compagnie)==0))  
+            strcpy(prix,ev.prix) ;
+}   
+}    
+fclose(f);
+
+	
+}
+
+/*----------------------------------prixhyber----------------------------------*/
+
+void afficherprixhyber(char hotel[] ,char prix[])
+{
+hyber h ;  
+
+
+
+
+FILE *f;
+
+ 
+int r;
+
+f=fopen("/home/ggmghoul/Desktop/agency-master/src/hyberdispo.txt","r");
+
+if (f!=NULL)
+{
+while(fscanf(f,"%s %s %s \n",h.pays,h.hotel,h.prix)!=EOF ) 
+{
+    if(strcmp(hotel,h.hotel)==0)
+           strcpy(prix,h.prix); 
+}
+}
+fclose(f); 
+            
+}  
+
+/*----------------------------------prixloc-----------------------------------------*/
+
+
+
+void afficherprixloc(char marque[] ,char prix[])
+{
+loc l ; 
+
+
+
+
+FILE *f;
+FILE *f1;
+ 
+int r;
+
+f=fopen("/home/ggmghoul/Desktop/agency-master/src/locdispo.txt","r");
+
+if (f!=NULL)
+{
+    
+while(fscanf(f,"%s %s \n",l.marque,l.prix)!=EOF ) 
+{
+    if (strcmp(marque,l.marque)==0) 
+       strcpy(prix,l.prix); 
+}
+}
+fclose(f); 
+}  
+
+

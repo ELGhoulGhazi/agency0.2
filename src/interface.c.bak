@@ -598,12 +598,12 @@ create_ModeEmploye (void)
   GtkWidget *image20;
   GtkWidget *label24;
   GtkWidget *buttonEGC;
-  GtkWidget *buttonEGFactures;
   GtkWidget *buttonDecoEmp;
   GtkWidget *buttonEPrestations;
   GtkWidget *buttonmsgE;
   GtkWidget *buttonrecE;
   GtkWidget *label98;
+  GtkWidget *buttonEGFactures;
 
   ModeEmploye = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (ModeEmploye), _("Mode Employ\303\251"));
@@ -626,11 +626,6 @@ create_ModeEmploye (void)
   gtk_widget_show (buttonEGC);
   gtk_fixed_put (GTK_FIXED (fixed6), buttonEGC, 72, 536);
   gtk_widget_set_size_request (buttonEGC, 144, 49);
-
-  buttonEGFactures = gtk_button_new_with_mnemonic (_("Factures"));
-  gtk_widget_show (buttonEGFactures);
-  gtk_fixed_put (GTK_FIXED (fixed6), buttonEGFactures, 272, 536);
-  gtk_widget_set_size_request (buttonEGFactures, 144, 49);
 
   buttonDecoEmp = gtk_button_new_with_mnemonic (_("Se d\303\251conecter"));
   gtk_widget_show (buttonDecoEmp);
@@ -656,11 +651,13 @@ create_ModeEmploye (void)
   gtk_widget_show (label98);
   gtk_container_add (GTK_CONTAINER (buttonrecE), label98);
 
+  buttonEGFactures = gtk_button_new_with_mnemonic (_("Factures"));
+  gtk_widget_show (buttonEGFactures);
+  gtk_fixed_put (GTK_FIXED (fixed6), buttonEGFactures, 272, 536);
+  gtk_widget_set_size_request (buttonEGFactures, 144, 49);
+
   g_signal_connect ((gpointer) buttonEGC, "clicked",
                     G_CALLBACK (on_buttonEGC_clicked),
-                    NULL);
-  g_signal_connect ((gpointer) buttonEGFactures, "clicked",
-                    G_CALLBACK (on_buttonEGFactures_clicked),
                     NULL);
   g_signal_connect ((gpointer) buttonDecoEmp, "clicked",
                     G_CALLBACK (on_buttonDecoEmp_clicked),
@@ -674,6 +671,9 @@ create_ModeEmploye (void)
   g_signal_connect ((gpointer) buttonrecE, "clicked",
                     G_CALLBACK (on_buttonrecE_clicked),
                     NULL);
+  g_signal_connect ((gpointer) buttonEGFactures, "clicked",
+                    G_CALLBACK (on_buttonEGFactures_clicked),
+                    NULL);
 
   /* Store pointers to all widgets, for use by lookup_widget(). */
   GLADE_HOOKUP_OBJECT_NO_REF (ModeEmploye, ModeEmploye, "ModeEmploye");
@@ -681,12 +681,12 @@ create_ModeEmploye (void)
   GLADE_HOOKUP_OBJECT (ModeEmploye, image20, "image20");
   GLADE_HOOKUP_OBJECT (ModeEmploye, label24, "label24");
   GLADE_HOOKUP_OBJECT (ModeEmploye, buttonEGC, "buttonEGC");
-  GLADE_HOOKUP_OBJECT (ModeEmploye, buttonEGFactures, "buttonEGFactures");
   GLADE_HOOKUP_OBJECT (ModeEmploye, buttonDecoEmp, "buttonDecoEmp");
   GLADE_HOOKUP_OBJECT (ModeEmploye, buttonEPrestations, "buttonEPrestations");
   GLADE_HOOKUP_OBJECT (ModeEmploye, buttonmsgE, "buttonmsgE");
   GLADE_HOOKUP_OBJECT (ModeEmploye, buttonrecE, "buttonrecE");
   GLADE_HOOKUP_OBJECT (ModeEmploye, label98, "label98");
+  GLADE_HOOKUP_OBJECT (ModeEmploye, buttonEGFactures, "buttonEGFactures");
 
   return ModeEmploye;
 }
@@ -1219,19 +1219,19 @@ create_Vols (void)
   GtkWidget *image63;
   GtkWidget *label110;
   GtkWidget *buttonvoldispo;
-  GtkWidget *label138;
-  GtkWidget *buttonvoirprixvol;
   GtkWidget *buttonvalidervol;
   GtkWidget *alignment10;
   GtkWidget *hbox10;
   GtkWidget *image25;
   GtkWidget *label92;
-  GtkWidget *comboboxentrydepart;
-  GtkWidget *comboboxentrydestination;
   GtkWidget *checkbuttonA;
   GtkWidget *checkbuttonAR;
   GtkWidget *checkbuttonfirst;
   GtkWidget *checkbuttoneco;
+  GtkWidget *buttonvoirprixvol;
+  GtkWidget *comboboxentrydepart;
+  GtkWidget *comboboxentrydestination;
+  GtkWidget *prixvoll;
 
   Vols = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (Vols), _("Vols"));
@@ -1375,16 +1375,6 @@ create_Vols (void)
   gtk_fixed_put (GTK_FIXED (fixed12), buttonvoldispo, 672, 168);
   gtk_widget_set_size_request (buttonvoldispo, 152, 41);
 
-  label138 = gtk_label_new ("");
-  gtk_widget_show (label138);
-  gtk_fixed_put (GTK_FIXED (fixed12), label138, 496, 568);
-  gtk_widget_set_size_request (label138, 280, 48);
-
-  buttonvoirprixvol = gtk_button_new_with_mnemonic (_("voir prix"));
-  gtk_widget_show (buttonvoirprixvol);
-  gtk_fixed_put (GTK_FIXED (fixed12), buttonvoirprixvol, 856, 568);
-  gtk_widget_set_size_request (buttonvoirprixvol, 112, 40);
-
   buttonvalidervol = gtk_button_new ();
   gtk_widget_show (buttonvalidervol);
   gtk_fixed_put (GTK_FIXED (fixed12), buttonvalidervol, 808, 40);
@@ -1408,16 +1398,6 @@ create_Vols (void)
   gtk_widget_show (label92);
   gtk_box_pack_start (GTK_BOX (hbox10), label92, FALSE, FALSE, 0);
 
-  comboboxentrydepart = gtk_combo_box_entry_new_text ();
-  gtk_widget_show (comboboxentrydepart);
-  gtk_fixed_put (GTK_FIXED (fixed12), comboboxentrydepart, 280, 232);
-  gtk_widget_set_size_request (comboboxentrydepart, 206, 34);
-
-  comboboxentrydestination = gtk_combo_box_entry_new_text ();
-  gtk_widget_show (comboboxentrydestination);
-  gtk_fixed_put (GTK_FIXED (fixed12), comboboxentrydestination, 800, 232);
-  gtk_widget_set_size_request (comboboxentrydestination, 206, 34);
-
   checkbuttonA = gtk_check_button_new_with_mnemonic (_("Aller"));
   gtk_widget_show (checkbuttonA);
   gtk_fixed_put (GTK_FIXED (fixed12), checkbuttonA, 224, 424);
@@ -1438,6 +1418,26 @@ create_Vols (void)
   gtk_fixed_put (GTK_FIXED (fixed12), checkbuttoneco, 809, 312);
   gtk_widget_set_size_request (checkbuttoneco, 125, 39);
 
+  buttonvoirprixvol = gtk_button_new_with_mnemonic (_("voir prix"));
+  gtk_widget_show (buttonvoirprixvol);
+  gtk_fixed_put (GTK_FIXED (fixed12), buttonvoirprixvol, 856, 568);
+  gtk_widget_set_size_request (buttonvoirprixvol, 112, 40);
+
+  comboboxentrydepart = gtk_combo_box_entry_new_text ();
+  gtk_widget_show (comboboxentrydepart);
+  gtk_fixed_put (GTK_FIXED (fixed12), comboboxentrydepart, 280, 232);
+  gtk_widget_set_size_request (comboboxentrydepart, 206, 34);
+
+  comboboxentrydestination = gtk_combo_box_entry_new_text ();
+  gtk_widget_show (comboboxentrydestination);
+  gtk_fixed_put (GTK_FIXED (fixed12), comboboxentrydestination, 800, 232);
+  gtk_widget_set_size_request (comboboxentrydestination, 206, 34);
+
+  prixvoll = gtk_label_new ("");
+  gtk_widget_show (prixvoll);
+  gtk_fixed_put (GTK_FIXED (fixed12), prixvoll, 640, 560);
+  gtk_widget_set_size_request (prixvoll, 216, 56);
+
   g_signal_connect ((gpointer) buttonretourVC, "clicked",
                     G_CALLBACK (on_buttonretourVC_clicked),
                     NULL);
@@ -1446,9 +1446,6 @@ create_Vols (void)
                     NULL);
   g_signal_connect ((gpointer) buttonvoldispo, "clicked",
                     G_CALLBACK (on_buttonvoldispo_clicked),
-                    NULL);
-  g_signal_connect ((gpointer) buttonvoirprixvol, "clicked",
-                    G_CALLBACK (on_buttonvoirprixvol_clicked),
                     NULL);
   g_signal_connect ((gpointer) buttonvalidervol, "clicked",
                     G_CALLBACK (on_buttonvalidervol_clicked),
@@ -1464,6 +1461,9 @@ create_Vols (void)
                     NULL);
   g_signal_connect ((gpointer) checkbuttoneco, "toggled",
                     G_CALLBACK (on_checkbuttoneco_toggled),
+                    NULL);
+  g_signal_connect ((gpointer) buttonvoirprixvol, "clicked",
+                    G_CALLBACK (on_buttonvoirprixvol_clicked),
                     NULL);
 
   /* Store pointers to all widgets, for use by lookup_widget(). */
@@ -1496,19 +1496,19 @@ create_Vols (void)
   GLADE_HOOKUP_OBJECT (Vols, image63, "image63");
   GLADE_HOOKUP_OBJECT (Vols, label110, "label110");
   GLADE_HOOKUP_OBJECT (Vols, buttonvoldispo, "buttonvoldispo");
-  GLADE_HOOKUP_OBJECT (Vols, label138, "label138");
-  GLADE_HOOKUP_OBJECT (Vols, buttonvoirprixvol, "buttonvoirprixvol");
   GLADE_HOOKUP_OBJECT (Vols, buttonvalidervol, "buttonvalidervol");
   GLADE_HOOKUP_OBJECT (Vols, alignment10, "alignment10");
   GLADE_HOOKUP_OBJECT (Vols, hbox10, "hbox10");
   GLADE_HOOKUP_OBJECT (Vols, image25, "image25");
   GLADE_HOOKUP_OBJECT (Vols, label92, "label92");
-  GLADE_HOOKUP_OBJECT (Vols, comboboxentrydepart, "comboboxentrydepart");
-  GLADE_HOOKUP_OBJECT (Vols, comboboxentrydestination, "comboboxentrydestination");
   GLADE_HOOKUP_OBJECT (Vols, checkbuttonA, "checkbuttonA");
   GLADE_HOOKUP_OBJECT (Vols, checkbuttonAR, "checkbuttonAR");
   GLADE_HOOKUP_OBJECT (Vols, checkbuttonfirst, "checkbuttonfirst");
   GLADE_HOOKUP_OBJECT (Vols, checkbuttoneco, "checkbuttoneco");
+  GLADE_HOOKUP_OBJECT (Vols, buttonvoirprixvol, "buttonvoirprixvol");
+  GLADE_HOOKUP_OBJECT (Vols, comboboxentrydepart, "comboboxentrydepart");
+  GLADE_HOOKUP_OBJECT (Vols, comboboxentrydestination, "comboboxentrydestination");
+  GLADE_HOOKUP_OBJECT (Vols, prixvoll, "prixvoll");
 
   return Vols;
 }

@@ -122,4 +122,10 @@ void supprimerrec(char cin1[]);
 void supprimerfact(char cin1[]);
 void afficherfact (GtkTreeView *liste);
 
+
+
+void afficherprixvol(char depart[] ,char dest[] ,char comp[] ,char prix[]);
+void afficherprixhyber(char hotel[] ,char prix[]);
+void afficherprixloc(char marque[] ,char prix[]);
+
 //int departdestdispo (char depart[][30] ,char destination[][30]);

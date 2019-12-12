@@ -285,7 +285,7 @@ if (f!=NULL)
      {
 while(fscanf(f,"%s %s %s %s %s \n" ,e.nom,e.prenom,e.date,e.user,e.password)!=EOF ) 
 {
-    if(strcmp(name,e.nom)==0)
+    if(strcmp(name,e.user)==0)
             {
         fprintf(f1,"%s %s %s %s %s \n" ,e.nom,e.prenom,e.date,newuser,newpass);
             }
