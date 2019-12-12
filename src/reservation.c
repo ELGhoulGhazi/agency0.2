@@ -1186,3 +1186,112 @@ if (r){
 
 }
 
+
+/*--------------------------------afficherfact----------------------------------------------------*/ 
+
+enum 
+{
+CIN33,
+VOSRESERVATION2,
+PRIX33,
+COLUMNS33
+}; 
+
+void afficherfact (GtkTreeView *liste)
+{
+GtkCellRenderer *render ;
+GtkTreeViewColumn *column ; 
+GtkTreeIter iter ; 
+
+GtkListStore *store ;
+
+char cin[50]; 
+char reserv[50]; 
+char prix[50]; 
+
+store=NULL ; 
+FILE* f ; 
+
+store=gtk_tree_view_get_model(liste) ; 
+if (store==NULL) 
+{
+
+render=gtk_cell_renderer_text_new () ; 
+column =gtk_tree_view_column_new_with_attributes("Cin",render,"text",CIN33,NULL) ; 
+gtk_tree_view_append_column (GTK_TREE_VIEW(liste),column); 
+
+render=gtk_cell_renderer_text_new () ; 
+column =gtk_tree_view_column_new_with_attributes("Reservation",render,"text",VOSRESERVATION2,NULL) ; 
+gtk_tree_view_append_column (GTK_TREE_VIEW(liste),column); 
+
+
+render=gtk_cell_renderer_text_new () ; 
+column =gtk_tree_view_column_new_with_attributes("Prix",render,"text",PRIX33,NULL) ; 
+gtk_tree_view_append_column (GTK_TREE_VIEW(liste),column); 
+
+
+
+
+store=gtk_list_store_new(COLUMNS33,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING) ; 
+
+f=fopen("/home/ggmghoul/Desktop/agency-master/src/reservationdata.txt","r") ; 
+if (f==NULL) 
+{
+return ; 
+}
+else 
+{
+f=fopen("/home/ggmghoul/Desktop/agency-master/src/reservationdata.txt","a+") ;
+ while(fscanf(f,"%s %s %s \n" ,cin,reserv,prix)!=EOF) 
+{
+gtk_list_store_append (store,&iter) ; 
+gtk_list_store_set (store,&iter,CIN33,cin,VOSRESERVATION2,reserv,PRIX33,prix,-1) ; 
+}
+fclose(f) ; }
+gtk_tree_view_set_model(GTK_TREE_VIEW (liste),GTK_TREE_MODEL (store)); 
+g_object_unref (store) ; 
+}
+}
+
+
+/*---------------------------------suppfact----------------------------------------------------*/
+
+
+void supprimerfact(char cin1[])
+
+{
+FILE *f;
+FILE *f1;
+
+int r;
+int n;
+
+char cin[50]; 
+char reserv[50]; 
+char prix[50]; 
+
+
+f=fopen("/home/ggmghoul/Desktop/agency-master/src/reservationdata.txt","r");
+f1=fopen("/home/ggmghoul/Desktop/agency-master/src/reservationdata1.txt","w");
+if (f!=NULL){
+    if(f1!=NULL){
+while(fscanf(f,"%s %s %s \n" ,cin,reserv,prix)!=EOF ) {
+    if(strcmp(cin1,cin)!=0)  
+    {
+        fprintf(f1,"%s %s %s \n" ,cin,reserv,prix);
+        r=1;
+    }
+}
+    }
+    fclose(f1);
+}
+
+fclose(f);
+if (r){
+	remove ("/home/ggmghoul/Desktop/agency-master/src/reservationdata.txt");
+	rename ("/home/ggmghoul/Desktop/agency-master/src/reservationdata1.txt","/home/ggmghoul/Desktop/agency-master/src/reservationdata.txt");
+	}
+
+}
+
+

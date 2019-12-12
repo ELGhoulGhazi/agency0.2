@@ -508,3 +508,7 @@ on_buttontraiteradmin_clicked          (GtkWidget        *objet_graphique,
 void
 on_buttonsuppadmin_clicked             (GtkWidget        *objet_graphique,
                                         gpointer         user_data);
+
+void
+on_buttonsuppfact_clicked              (GtkWidget        *objet_graphique,
+                                        gpointer         user_data);

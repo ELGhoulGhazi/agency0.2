@@ -307,12 +307,15 @@ void
 on_buttonEGFactures_clicked            (GtkWidget       *objet_graphique,
                                         gpointer         user_data)
 {
-GtkWidget *Fact ,*Emp;
+GtkWidget *Fact ,*Emp,*treeview ;
 
 Emp=lookup_widget(objet_graphique,"ModeEmploye");
 Fact=create_Factures();
 gtk_widget_show(Fact);
 gtk_widget_hide(Emp);
+
+treeview=lookup_widget(Fact,"treeviewfactures");
+afficherfact(treeview) ; 
 }
 
 
@@ -2519,5 +2522,29 @@ gtk_widget_hide(rec);
 
 treeview=lookup_widget(rec1,"treeviewrecadmin");
 afficherrec(treeview) ; 
+}
+
+
+void
+on_buttonsuppfact_clicked              (GtkWidget        *objet_graphique,
+                                        gpointer         user_data)
+{
+FILE *f ; 
+GtkWidget *rec ,*ciin ,*rec1 ,*treeview ;
+
+char cin[50] ; 
+
+ciin=lookup_widget(objet_graphique,"entrycinfact");
+strcpy(cin,gtk_entry_get_text(GTK_ENTRY(ciin)));
+
+supprimerfact(cin);
+
+rec=lookup_widget(objet_graphique,"Factures");
+rec1=create_Factures(); 
+gtk_widget_show(rec1);
+gtk_widget_hide(rec);
+
+treeview=lookup_widget(rec1,"treeviewfactures");
+afficherfact(treeview) ; 
 }
 

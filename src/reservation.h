@@ -119,5 +119,7 @@ void reclamer(char cin[] ,char message[] ,char type[],int j ,int m , int y ) ;
 void afficherrec (GtkTreeView *liste);
 void modifieretat(char cin1[]); 
 void supprimerrec(char cin1[]);
+void supprimerfact(char cin1[]);
+void afficherfact (GtkTreeView *liste);
 
 //int departdestdispo (char depart[][30] ,char destination[][30]);
