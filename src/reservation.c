@@ -881,3 +881,119 @@ remove ("/home/ggmghoul/Desktop/agency-master/src/reservationtotale.txt");
 	rename ("/home/ggmghoul/Desktop/agency-master/src/reservationtotale1.txt","/home/ggmghoul/Desktop/agency-master/src/reservationtotale.txt");
 
 }
+
+
+
+
+/*-------------------------------------------message---------------------------------------------------*/
+
+void messgae(char cin[] ,char message[]) 
+{
+FILE *f;
+
+f=fopen("/home/ggmghoul/Desktop/agency-master/src/message.txt","a");
+if(f!=NULL)
+{fprintf(f,"%s %s \n",cin,message);
+fclose(f);
+}
+}
+
+
+/*-----------------------------------affichermessgae----------------------------------------------------------*/
+
+
+
+enum 
+{
+CIN0 , 
+MESSAGE0 , 
+COLUMNS00 
+};
+void affichermessage (GtkTreeView *liste) 
+{
+GtkCellRenderer *render ;
+GtkTreeViewColumn *column ; 
+GtkTreeIter iter ; 
+
+GtkListStore *store ;
+
+char cin[50]; 
+char message[3000];
+ 
+
+store=NULL ; 
+FILE* f ; 
+
+store=gtk_tree_view_get_model(liste) ; 
+if (store==NULL) 
+{
+
+render=gtk_cell_renderer_text_new () ; 
+column =gtk_tree_view_column_new_with_attributes("Cin",render,"text",CIN0,NULL) ; 
+gtk_tree_view_append_column (GTK_TREE_VIEW(liste),column); 
+
+render=gtk_cell_renderer_text_new () ; 
+column =gtk_tree_view_column_new_with_attributes("Message",render,"text",MESSAGE0,NULL) ; 
+gtk_tree_view_append_column (GTK_TREE_VIEW(liste),column); 
+
+
+
+
+
+
+
+store=gtk_list_store_new(COLUMNS00,G_TYPE_STRING,G_TYPE_STRING) ; 
+
+f=fopen("/home/ggmghoul/Desktop/agency-master/src/message.txt","r") ; 
+if (f==NULL) 
+{
+return ; 
+}
+else 
+{
+f=fopen("/home/ggmghoul/Desktop/agency-master/src/message.txt","a+") ;
+ while(fscanf(f,"%s %[^\n]s \n",cin,message)!=EOF) 
+{
+gtk_list_store_append (store,&iter) ; 
+gtk_list_store_set (store,&iter,CIN0,cin,MESSAGE0,message,-1) ; 
+}
+fclose(f) ; }
+gtk_tree_view_set_model(GTK_TREE_VIEW (liste),GTK_TREE_MODEL (store)); 
+g_object_unref (store) ; 
+}
+}
+
+
+/*----------------------------supprimermsg--------------------------------------------*/
+
+void suppmsg(char cin[])
+{
+FILE *f;
+FILE *f1;
+char cin0[50]; 
+char message0[3000]; 
+
+int r;
+int n;
+f=fopen("/home/ggmghoul/Desktop/agency-master/src/message.txt","r");
+f1=fopen("/home/ggmghoul/Desktop/agency-master/src/message1.txt","w");
+if (f!=NULL){
+    if(f1!=NULL){
+while(fscanf(f,"%s %[^\n]s \n",cin0,message0)!=EOF ) {
+    if(strcmp(cin,cin0)!=0)  
+    {
+        fprintf(f1,"%s %s \n",cin0,message0);
+        r=1;
+    }
+}
+    }
+    fclose(f1);
+}
+
+fclose(f);
+if (r){
+	remove ("/home/ggmghoul/Desktop/agency-master/src/message.txt");
+	rename ("/home/ggmghoul/Desktop/agency-master/src/message1.txt","/home/ggmghoul/Desktop/agency-master/src/message.txt");
+	}
+
+}

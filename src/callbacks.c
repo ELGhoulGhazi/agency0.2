@@ -645,12 +645,15 @@ void
 on_buttonmsgA_clicked                  (GtkWidget       *objet_graphique,
                                         gpointer         user_data)
 {
-GtkWidget *message ,*admin;
+GtkWidget *message ,*admin ,*treeview;
 
 admin=lookup_widget(objet_graphique,"ModeAdmin");
 message=create_message();
 gtk_widget_show(message);
 gtk_widget_hide(admin);
+
+treeview=lookup_widget(message,"treeviewmessageadmin");
+affichermessage(treeview) ; 
 }
 
 
@@ -671,12 +674,15 @@ void
 on_buttonmsgE_clicked                  (GtkWidget       *objet_graphique,
                                         gpointer         user_data)
 {
-GtkWidget *message ,*emp;
+GtkWidget *message ,*emp ,*treeview;
 
 emp=lookup_widget(objet_graphique,"ModeEmploye");
 message=create_messageE();
 gtk_widget_show(message);
 gtk_widget_hide(emp);
+
+treeview=lookup_widget(message,"treeviewmessageemp");
+affichermessage(treeview) ; 
 }
 
 
@@ -844,12 +850,15 @@ void
 on_buttonhyberV_clicked                (GtkWidget       *objet_graphique,
                                         gpointer         user_data)
 {
-GtkWidget *hyberv ,*visiteur;
+GtkWidget *hyberv ,*visiteur, *treeview;
 
 visiteur=lookup_widget(objet_graphique,"ModeVisiteur");
 hyberv=create_Hybergementvisiteur();
 gtk_widget_show(hyberv);
 gtk_widget_hide(visiteur);
+
+treeview=lookup_widget(hyberv,"treeviewhybervisiteur");
+afficherhybergement(treeview) ; 
 }
 
 
@@ -857,12 +866,15 @@ void
 on_buttonlocationV_clicked             (GtkWidget       *objet_graphique,
                                         gpointer         user_data)
 {
-GtkWidget *locv ,*visiteur;
+GtkWidget *locv ,*visiteur ,*treeview;
 
 visiteur=lookup_widget(objet_graphique,"ModeVisiteur");
 locv=create_Locationvisiteur();
 gtk_widget_show(locv);
 gtk_widget_hide(visiteur);
+
+treeview=lookup_widget(locv,"treeviewlocationvisiteur");
+afficherlocation(treeview) ; 
 }
 
 
@@ -870,12 +882,16 @@ void
 on_buttonvolsV_clicked                 (GtkWidget       *objet_graphique,
                                         gpointer         user_data)
 {
-GtkWidget *volv ,*visiteur;
+GtkWidget *volv ,*visiteur ,*treeview;
 
 visiteur=lookup_widget(objet_graphique,"ModeVisiteur");
 volv=create_Volsvisiteur();
 gtk_widget_show(volv);
 gtk_widget_hide(visiteur);
+
+
+treeview=lookup_widget(volv,"treeviewvolvisiteur");
+affichervol(treeview) ; 
 }
 
 
@@ -2273,4 +2289,93 @@ effacer() ;
 }
 
 
+
+
+void
+on_buttonenvoyermessage_clicked        (GtkWidget        *objet_graphique,
+                                        gpointer         user_data)
+{
+GtkWidget *modif ,*gemp ,*ciin , *mess ;
+
+char cin[50]; 
+char message1[3000]; 
+
+ciin=lookup_widget(objet_graphique,"entrycincontacter");
+mess=lookup_widget(objet_graphique,"entrymessagecontacter");
+
+strcpy(cin,gtk_entry_get_text(GTK_ENTRY(ciin)));
+strcpy(message1,gtk_entry_get_text(GTK_ENTRY(mess)));
+
+messgae(cin,message1);
+
+modif=lookup_widget(objet_graphique,"contacter");
+gemp=create_ModeClient();
+gtk_widget_show(gemp);
+gtk_widget_hide(modif); 
+}
+
+
+void
+on_buttonsuppmessageadmin_clicked      (GtkWidget        *objet_graphique,
+                                        gpointer         user_data)
+{
+FILE *f ; 
+char cin[50]; 
+
+
+
+  
+GtkWidget *inputcin  ;
+GtkWidget *treeview ;
+GtkWidget *gemp ,*modif ;
+
+
+inputcin=lookup_widget(objet_graphique,"entrycinmessageadmin"); 
+modif=lookup_widget(objet_graphique,"message");
+
+strcpy(cin,gtk_entry_get_text(GTK_ENTRY(inputcin)));
+suppmsg(cin);
+
+
+gemp=create_message();
+gtk_widget_show(gemp);
+gtk_widget_hide(modif); 
+
+
+treeview=lookup_widget(gemp,"treeviewmessageadmin");
+affichermessage(treeview) ; 
+
+}
+
+
+void
+on_buttonsuppmessageemp_clicked        (GtkWidget        *objet_graphique,
+                                        gpointer         user_data)
+{
+FILE *f ; 
+char cin[50]; 
+
+
+
+  
+GtkWidget *inputcin  ;
+GtkWidget *treeview ;
+GtkWidget *gemp ,*modif ;
+
+
+inputcin=lookup_widget(objet_graphique,"entrycinempmsg"); 
+modif=lookup_widget(objet_graphique,"messageE");
+
+strcpy(cin,gtk_entry_get_text(GTK_ENTRY(inputcin)));
+suppmsg(cin);
+
+
+gemp=create_messageE();
+gtk_widget_show(gemp);
+gtk_widget_hide(modif); 
+
+
+treeview=lookup_widget(gemp,"treeviewmessageemp");
+affichermessage(treeview) ; 
+}
 

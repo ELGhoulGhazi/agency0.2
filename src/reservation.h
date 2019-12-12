@@ -109,4 +109,9 @@ void afficherreservation (GtkTreeView *liste);
 void stockage() ;
 void effacer() ;
 
+
+void messgae(char cin[] ,char message[]);
+void affichermessage (GtkTreeView *liste) ;
+void suppmsg(char cin[]);
+
 //int departdestdispo (char depart[][30] ,char destination[][30]);

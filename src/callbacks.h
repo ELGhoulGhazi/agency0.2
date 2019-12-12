@@ -474,3 +474,15 @@ on_buttonafficherreservation_clicked   (GtkWidget        *objet_graphique,
 void
 on_buttonok_clicked                    (GtkWidget        *objet_graphique,
                                         gpointer         user_data);
+
+void
+on_buttonenvoyermessage_clicked        (GtkWidget        *objet_graphique,
+                                        gpointer         user_data);
+
+void
+on_buttonsuppmessageadmin_clicked      (GtkWidget        *objet_graphique,
+                                        gpointer         user_data);
+
+void
+on_buttonsuppmessageemp_clicked        (GtkWidget        *objet_graphique,
+                                        gpointer         user_data);
